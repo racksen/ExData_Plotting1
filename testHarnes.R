@@ -1,4 +1,6 @@
-#rough memory estimate for "Electric Power Consumption" dataset
+#' Author : Senthil Ramalingam
+
+# rough memory estimate for "Electric Power Consumption" dataset
 # records = 2,075,259; cols = 9 (datetime*1 + numeric*8)
 EPC.Size.oneRecord <- object.size(date()) + object.size(numeric())*8
 EPC.Size.totalMB <- format(2075259 * EPC.Size.oneRecord,units="Mb")
