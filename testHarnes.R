@@ -8,10 +8,14 @@ EPC.Size.totalMB
 
 #Read specific rows 
 EPC.DF.Columns <- read.csv("./data/household_power_consumption.txt", header=TRUE, nrow=1, sep = ";")
-EPC.DF <- read.csv("./data/household_power_consumption.txt", skip=66636, nrows= (2 * 24 * 60), col.names = names(EPC.DF.Columns),sep = ";")
+EPC.DF <- read.csv(
+  "./data/household_power_consumption.txt", sep = ";", skip=66636, nrows= (2 * 24 * 60), 
+  col.names = names(EPC.DF.Columns),
+  colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric')
+  )
 
 #Write the csv file for future reference
-write.csv2(EPC.DF,file = "./data/household_power_consumption_1.txt",row.names=FALSE )
+write.csv(EPC.DF,file = "./data/household_power_consumption_1.txt",row.names=FALSE )
 
 #add new datetime column with date format
 EPC.DF$DateTime <- strptime(paste(EPC.DF$Date, EPC.DF$Time), "%d/%m/%Y %H:%M:%S")
