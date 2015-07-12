@@ -23,9 +23,24 @@ if(!exists("EPC.DF")){
 }
 
 
-#draw histogram 
-hist(EPC.DF$Global_active_power,col = "red", xlab = "Global Active Power (kilowatts)", main = "Global Active Power")
+par(mfrow=c(2,2))
 
-#copy the drwan histogram as png with png device and turn it off
-dev.copy(png,file="plot1.png")
+##PLOT 1
+plot(EPC.DF$datetime_stamp,EPC.DF$Global_active_power, type="l", xlab="", ylab="Global Active Power")
+##PLOT 2
+plot(EPC.DF$datetime_stamp,EPC.DF$Voltage, type="l", xlab="datetime", ylab="Voltage")
+
+##PLOT 3
+plot(EPC.DF$datetime_stamp,EPC.DF$Sub_metering_1, type="l", xlab="", ylab="Energy sub metering")
+lines(EPC.DF$datetime_stamp,EPC.DF$Sub_metering_2,col="red")
+lines(EPC.DF$datetime_stamp,EPC.DF$Sub_metering_3,col="blue")
+legend("topright", col=c("black","red","blue"), c("Sub_metering_1  ","Sub_metering_2  ", "Sub_metering_3  "),lty=c(1,1), bty="n", cex=.5) #bty removes the box, cex shrinks the text, spacing added after labels so it renders correctly
+
+#PLOT 4
+plot(EPC.DF$datetime_stamp,EPC.DF$Global_reactive_power, type="l", xlab="datetime", ylab="Global_reactive_power")
+
+#OUTPUT
+dev.copy(png, file="plot4.png", width=580, height=480)
 dev.off()
+
+
